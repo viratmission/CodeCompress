@@ -1,0 +1,14 @@
+﻿## .NET build artifacts
+bin/
+obj/
+*.user
+*.suo
+.vs/
+publish/
+out/
+
+## Secrets
+appsettings.Production.json
+appsettings.Local.json
+secrets.json
+*.env

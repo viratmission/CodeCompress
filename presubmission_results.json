@@ -1,0 +1,768 @@
+﻿{
+    "AiResponses":  [
+                        {
+                            "Query":  "Explain the architecture of this project.",
+                            "Type":  "ask",
+                            "Answer":  "I\u0027d be happy to walk you through the architecture of this project.\n\nThe project is called TodoApi, and it appears to be a web-based todo list application. The architecture can be broken down into several layers:\n\n1. **Frontend/Client**: This layer is responsible for rendering the user interface and handling user interactions. It is built using Blazor WebAssembly, which allows the application to run in the browser. The frontend code is located in the `Todo.Web/Client` directory.\n2. **Backend/WebAPI**: This layer provides the RESTful API that the frontend interacts with. It is built using ASP.NET Core and is responsible for handling requests, validating data, and interacting with the database. The backend code is located in the `Todo.Web/Server` directory.\n3. **Data Access/EF Core**: This layer is responsible for interacting with the database. It uses Entity Framework Core (EF Core) to define the database schema and perform CRUD operations. The data access code is located in the `Todo.Api` directory.\n4. **Database**: This layer is the storage layer, where the application\u0027s data is persisted. The database is SQLite, and the database file is stored in the `.db` directory.\n\nThe communication between these layers occurs as follows:\n\n* The frontend sends requests to the backend API, which is hosted in the `Todo.Web/Server` directory.\n* The backend API validates the requests, performs any necessary business logic, and then interacts with the database using EF Core.\n* The database stores and retrieves data as needed, and the backend API returns the results to the frontend.\n* The frontend renders the data to the user.\n\nSome notable features of this architecture include:\n\n* **Authentication**: The application uses cookie-based authentication, which is handled by the `Todo.Web/Server/Authentication` directory.\n* **Authorization**: The application uses role-based authorization, which is handled by the `Todo.Web/Server/Authorization` directory.\n* **Data Protection**: The application uses data protection to encrypt sensitive data, such as authentication tokens.\n* **API Gateway**: The application uses YARP (Yet Another Reverse Proxy) to forward requests from the frontend to the backend API.\n\nOverall, this architecture provides a robust and scalable foundation for building a web-based todo list application.\n\nHere are some key files and directories to note:\n\n* `Todo.Web/Client/Program.cs`: This file contains the entry point for the frontend application.\n* `Todo.Web/Server/Program.cs`: This file contains the entry point for the backend API.\n* `Todo.Api/Todos/TodoApi.cs`: This file contains the implementation of the Todo API, which handles requests and interacts with the database.\n* `Todo.Web/Server/TodoApi.cs`: This file contains the implementation of the Todo API gateway, which forwards requests from the frontend to the backend API.\n\nI hope this helps! Let me know if you have any further questions.",
+                            "References":  [
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program, client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program, server"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "TodoApp.AppHost/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program, app"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/TodoDbContextModelSnapshot.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: dbcontext"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/wwwroot/css/app.css",
+                                                   "language":  "CSS",
+                                                   "reason":  "Matched terms: app, client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/App.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: app, server"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/appsettings.Development.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: app, server"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/appsettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: app, server"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/AuthClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/appsettings.Development.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: app"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/appsettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: app"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/TodoDbContext.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: dbcontext"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/DbContextExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: dbcontext"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TodoApiTests.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Todo.Web.Client.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Todo.Web.Server.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: server"
+                                               },
+                                               {
+                                                   "filePath":  "TodoApp.AppHost/appsettings.Development.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: app"
+                                               },
+                                               {
+                                                   "filePath":  "TodoApp.AppHost/appsettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: app"
+                                               },
+                                               {
+                                                   "filePath":  "TodoApp.AppHost/TodoApp.AppHost.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: app"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Components/LogInForm.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Components/TodoList.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Properties/launchSettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/wwwroot/bootstrap/LICENSE",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoApp.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/_Imports.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/AuthenticationExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server"
+                                               }
+                                           ]
+                        },
+                        {
+                            "Query":  "Teach me authentication from beginner to advanced using this repository.",
+                            "Type":  "ask",
+                            "Answer":  "# Authentication Learning Path: Beginner to Advanced\nThis learning path is grounded in the actual repository architecture of TodoApi, providing a comprehensive guide to understanding authentication from beginner to advanced levels.\n\n## Level 1 — Fundamentals (Auth vs Authz, Registration, Login, Errors)\n- **What it is**: Authentication is the process of verifying the identity of users, while authorization determines their access rights. Registration involves creating a user account, and login is the process of accessing that account. Errors in authentication can lead to security vulnerabilities.\n- **Why it matters**: Proper authentication and authorization are crucial for securing applications and protecting user data.\n- **In this repository**: The `Todo.Web/Server/Authentication/AuthenticationExtensions.cs` file demonstrates how authentication is configured, including cookie-based authentication and external OAuth providers.\n- **Important files**: `Todo.Web/Server/Authentication/AuthenticationExtensions.cs`, `Todo.Api/Authorization/CheckCurrentUserAuthHandler.cs`.\n- **Flow**: Users register or log in, and their credentials are verified against a database or an external authentication service.\n- **Practice**: Examine the `LogInForm.razor` component in `Todo.Web/Client/Components` to understand how login functionality is implemented.\n\n## Level 2 — In This Repository: [Architecture specifics e.g. Cookie \u0026 External OAuth Providers]\n- **What it is**: The repository implements cookie-based authentication and supports external OAuth providers like GitHub, Google, and Microsoft.\n- **Why it matters**: These mechanisms allow for flexible and secure user authentication.\n- **In this repository**: `Todo.Web/Server/Authentication/AuthenticationExtensions.cs` shows how these providers are configured.\n- **Important files**: `Todo.Web/Server/Authentication/AuthenticationExtensions.cs`.\n- **Flow**: Upon successful authentication, a cookie is issued to the user, which is then used for subsequent requests.\n- **Practice**: Investigate how different OAuth providers are added and configured in `AuthenticationExtensions.cs`.\n\n## Level 3 — Backend Authorization \u0026 API Security (`CheckCurrentUserAuthHandler.cs`, `CurrentUser.cs`, `RequireCurrentUser`)\n- **What it is**: Backend authorization involves checking if a user is authenticated and authorized to access certain resources. API security ensures that APIs are protected against unauthorized access.\n- **Why it matters**: Ensures that only authorized users can access sensitive data and functionality.\n- **In this repository**: Files like `Todo.Api/Authorization/CheckCurrentUserAuthHandler.cs` and `Todo.Api/Authorization/CurrentUser.cs` handle authorization logic.\n- **Important files**: `Todo.Api/Authorization/CheckCurrentUserAuthHandler.cs`, `Todo.Api/Authorization/CurrentUser.cs`.\n- **Flow**: Each request to the API is checked for authentication and authorization using handlers like `CheckCurrentUserAuthHandler`.\n- **Practice**: Analyze how `CheckCurrentUserAuthHandler` verifies user existence and authentication status.\n\n## Level 4 — Frontend Authentication \u0026 State (`Todo.Web/Client`, `LogInForm.razor`, `HttpAuthenticationStateProvider.cs`)\n- **What it is**: Frontend authentication involves managing user authentication state on the client-side, including login forms and authentication state providers.\n- **Why it matters**: Provides a seamless user experience by managing authentication state across pages and sessions.\n- **In this repository**: `Todo.Web/Client/Components/LogInForm.razor` and `Todo.Web/Server/Authentication/HttpAuthenticationStateProvider.cs` manage frontend authentication state.\n- **Important files**: `Todo.Web/Client/Components/LogInForm.razor`, `Todo.Web/Server/Authentication/HttpAuthenticationStateProvider.cs`.\n- **Flow**: The frontend sends authentication requests to the backend, which then sets an authentication cookie upon successful login.\n- **Practice**: Examine how `LogInForm.razor` handles user input and authentication requests.\n\n## Level 5 — Security \u0026 Best Practices (CORS, HTTPS, Rate Limiting, Cookie flags)\n- **What it is**: Implementing security best practices such as CORS, HTTPS, rate limiting, and secure cookie flags to protect against common web vulnerabilities.\n- **Why it matters**: Enhances the overall security posture of the application, protecting against attacks and data breaches.\n- **In this repository**: While not explicitly covered, understanding these concepts is crucial for a secure application.\n- **Important files**: N/A.\n- **Flow**: Implementing these practices involves configuring the application to use HTTPS, setting appropriate CORS policies, limiting request rates, and securely handling cookies.\n- **Practice**: Research and discuss how these security practices can be applied to the TodoApi application.\n\n## Level 6 — Advanced / Production Next Steps [NOT IMPLEMENTED — NEXT CONCEPTS] (Refresh tokens, Token rotation, MFA, Email verification, Password reset)\n- **What it is**: Advanced authentication and security features including refresh tokens for token rotation, multi-factor authentication (MFA), email verification, and password reset mechanisms.\n- **Why it matters**: These features enhance security and user experience, especially in production environments.\n- **In this repository**: Not currently implemented.\n- **Important files**: N/A.\n- **Flow**: Implementing these features involves integrating additional libraries or services for MFA, email services for verification and password reset, and modifying authentication logic to include refresh tokens.\n- **Practice**: Discuss potential implementations of these features in the TodoApi application, considering security and usability implications.\n\nStart with Level 1, Lesson 1. When you\u0027re ready, say **Start Level 1** or ask any question, and I can walk through the actual code step-by-step.",
+                            "References":  [
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/AuthenticationExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: authentication, auth"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Authorization/CheckCurrentUserAuthHandler.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: auth, authorization"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Authorization/CurrentUser.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: auth, authorization"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Authorization/CurrentUserExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: auth, authorization"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Components/LogInForm.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: login"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/HttpAuthenticationStateProvider.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: authentication, auth"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/TokenNames.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: authentication, auth, token"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/AuthClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: auth, authclient"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/AuthenticationSchemes.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: authentication, auth"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program"
+                                               },
+                                               {
+                                                   "filePath":  "TodoApp.AppHost/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: program"
+                                               },
+                                               {
+                                                   "filePath":  "README.md",
+                                                   "language":  "Markdown",
+                                                   "reason":  "Matched terms: read"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/GlobalUsings.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: using"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Users/TodoUser.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Users/UsersApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/ExternalProviders.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: authentication, auth"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TokenService.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: token"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/AuthApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: auth"
+                                               }
+                                           ]
+                        },
+                        {
+                            "Query":  "Trace a request from the frontend to the backend.",
+                            "Type":  "ask",
+                            "Answer":  "## Tracing a Request from Frontend to Backend\n\nTo understand how a request is traced from the frontend to the backend in the TodoApi application, let\u0027s break down the process step by step, focusing on key components and files within the repository.\n\n### Step 1: Frontend Request Initiation\n\nThe process starts in the frontend, specifically within the `Todo.Web/Client` directory. Here, components like `TodoList.razor` initiate requests to the backend. For example, when a user adds a new todo item, the `AddTodo` method in `TodoList.razor` is called.\n\n```csharp\nasync Task AddTodo()\n{\n    var createdTodo = await Client.AddTodoAsync(NewTodo);\n    if (createdTodo is not null)\n    {\n        NewTodo = null;\n        form!.EditContext!.MarkAsUnmodified();\n        todos!.Add(createdTodo);\n    }\n}\n```\n\nThis method utilizes the `TodoClient` to make an HTTP request to the backend.\n\n### Step 2: TodoClient Configuration\n\nThe `TodoClient` is configured in the `Program.cs` file within the `Todo.Web/Client` directory. This configuration sets up the client to make requests to the backend.\n\n```csharp\nbuilder.Services.AddHttpClient\u003cTodoClient\u003e(client =\u003e\n{\n    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress);\n\n    // The cookie auth stack detects this header and avoids redirects for unauthenticated\n    // requests\n    client.DefaultRequestHeaders.TryAddWithoutValidation(\"X-Requested-With\", \"XMLHttpRequest\");\n});\n```\n\n### Step 3: Backend Routing and Handling\n\nRequests from the frontend are handled by the backend, which is primarily configured in the `Todo.Web/Server` directory. The `TodoApi.cs` file defines routes for handling todo-related requests.\n\n```csharp\npublic static RouteGroupBuilder MapTodos(this IEndpointRouteBuilder routes)\n{\n    var group = routes.MapGroup(\"/todos\");\n\n    group.RequireAuthorization();\n\n    group.MapForwarder(\"{*path}\", \"http://todoapi\", new ForwarderRequestConfig(), b =\u003e\n    {\n        b.AddRequestTransform(async c =\u003e\n        {\n            var accessToken = await c.HttpContext.GetTokenAsync(TokenNames.AccessToken);\n            c.ProxyRequest.Headers.Authorization = new(\"Bearer\", accessToken);\n        });\n    });\n\n    return group;\n}\n```\n\nThis configuration shows how requests to `/todos` are forwarded to the `http://todoapi` endpoint, with authentication headers being transformed to include an access token.\n\n### Step 4: Data Access and Processing\n\nOnce the request reaches the appropriate endpoint, the backend processes it. This often involves database interactions through Entity Framework Core, as seen in the `TodoApi/Todos/TodoApi.cs` file.\n\n```csharp\ngroup.MapPost(\"/\", async Task\u003cCreated\u003cTodoItem\u003e\u003e (TodoDbContext db, TodoItem newTodo, CurrentUser owner) =\u003e\n{\n    var todo = new Todo\n    {\n        Title = newTodo.Title,\n        OwnerId = owner.Id\n    };\n\n    db.Todos.Add(todo);\n    await db.SaveChangesAsync();\n\n    return TypedResults.Created($\"/todos/{todo.Id}\", todo.AsTodoItem());\n});\n```\n\nThis example shows how a new todo item is added to the database in response to a POST request.\n\n### Conclusion\n\nTracing a request from the frontend to the backend in the TodoApi application involves several steps, from initiating the request in the frontend components, configuring the `TodoClient`, routing and handling requests in the backend, to finally processing the request and interacting with the database. Each step is crucial for the application\u0027s functionality and is grounded in specific files and configurations within the repository.",
+                            "References":  [
+                                               {
+                                                   "filePath":  "Todo.Web/Server/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, todoapi, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/TodoDbContextModelSnapshot.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: api, dbcontext"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: api, todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/TodoDbContext.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: api, dbcontext"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TodoApiTests.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: api, todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: client, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Components/LogInForm.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client, web, components, razor"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Components/TodoList.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client, web, components, razor"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: client, todoclient, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Todo.Web.Client.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: client, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoApp.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client, web, razor"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/_Imports.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client, web, razor"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/App.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: server, web, razor"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/AuthClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: client, server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Todo.Web.Server.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/_Imports.razor",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: server, web, razor"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/DbContextExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: api, dbcontext"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todo.Api.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: api"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/Todo.Api.Tests.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: api"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Properties/launchSettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: client, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/wwwroot/bootstrap/LICENSE",
+                                                   "language":  "",
+                                                   "reason":  "Matched terms: client, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/wwwroot/css/app.css",
+                                                   "language":  "CSS",
+                                                   "reason":  "Matched terms: client, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/AuthenticationExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/AuthenticationSchemes.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/ExternalProviders.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/HttpAuthenticationStateProvider.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Authentication/TokenNames.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Properties/launchSettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/appsettings.Development.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: server, web"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/appsettings.json",
+                                                   "language":  "JSON",
+                                                   "reason":  "Matched terms: server, web"
+                                               }
+                                           ]
+                        },
+                        {
+                            "Query":  "What happens if I modify this feature?",
+                            "Type":  "change-impact",
+                            "Answer":  "AI service error: An error occurred while sending the request.\n\n### Short Answer\r\nBased on repository analysis of **TodoApi**, this project contains 16 relevant files across 6 modules and 6 architectural layers.\r\n\r\n### What This Means\r\nCodeCompass continuously indexes source files, imports, endpoints, and database models to map out how the application is constructed from first principles.\r\n\r\n### How It Works in This Project\r\nRepository: TodoApi\nPrimary language: C#\nTotal files: 78\nLanguages: C# (40 files), JSON (13 files), XML (9 files), Shell (1 files), YAML (1 files)\nDetected modules:\n  - hooks [Hooks] at .git/hooks\n  - Migrations [Migrations] at Todo.Api/Migrations\n  - Client [Frontend] at Todo.Web/Client\n  - Server [Backend] at Todo.Web/Server\n  - Shared [Shared] at Todo.Web/Shared\n  - Components [Components] at Todo.Web/Client/Components\r\n\r\n**Implemented Features in this Repository:**\r\n- [IMPLEMENTED] CRUD Endpoints: Complete `GET /todos`, `POST /todos`, `PUT /todos/{id}`, `DELETE /todos/{id}` in `Todo.Api/Todos/TodoApi.cs`.\r\n- [IMPLEMENTED] User Scoping: Every query filters todos by `CurrentUser.Id` to isolate user data.\r\n- [IMPLEMENTED] Input Parameter Validation: `ValidationFilter.cs` applies `MiniValidator` to `TodoItem` DTOs.\r\n- [IMPLEMENTED] Per-User Rate Limiting: Configured in `RateLimitExtensions.cs` to prevent abuse.\r\n- [IMPLEMENTED] Frontend API Client: `Todo.Web/Client/TodoClient.cs` handles HTTP requests from Blazor.\r\n- [IMPLEMENTED] Database Persistence: Entity Framework Core with SQLite in `TodoDbContext.cs`.\r\n\r\n**Missing / Next Production Concepts:**\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Soft Delete (tombstoning): Not implemented (deletes permanently remove rows from SQLite).\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Todo Due Dates, Priority Levels, and Tags: Not implemented (model only supports Title and IsComplete).\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Pagination and Search: Not implemented (loads all user items at once).\r\n\r\n### Flow\r\n```\r\nHTTP Request / Client\r\n       ↓\r\nEndpoint Handler (GET /)\r\n       ↓\r\nBusiness / Service Logic \u0026 EF Core DbContext\r\n       ↓\r\nDatabase (SQLite / Persistent Store)\r\n```\r\n\r\n### Important Files\r\n- `Todo.Api.Tests/TodoApiTests.cs` (C#) — Matched terms: todoapi, tests\r\n- `Todo.Api/Filters/ValidationFilter.cs` (C#) — Matched terms: validation\r\n- `Todo.Api/Todos/TodoApi.cs` (C#) — Matched terms: todoapi\r\n- `Todo.Web/Server/TodoApi.cs` (C#) — Matched terms: todoapi\r\n- `Todo.Api/Migrations/TodoDbContextModelSnapshot.cs` (C#) — Architectural context file\r\n- `Todo.Web/Client/TodoClient.cs` (C#) — Architectural context file\r\n\r\n### What To Explore Next\r\n1. Review the primary entry point and route registrations.\r\n2. Inspect the database context configuration and entity model definitions.\r\n3. Run the API locally and test endpoints using curl or Swagger.\r\n",
+                            "References":  [
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TodoApiTests.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: todoapi, tests"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Filters/ValidationFilter.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: validation"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: todoapi"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/TodoDbContextModelSnapshot.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/Todo.Api.Tests.csproj",
+                                                   "language":  "XML",
+                                                   "reason":  "Matched terms: tests"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/UserApiTests.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: tests"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/TodoDbContext.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/Todo.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/20230714032431_ForeignKeyChange.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: change"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/20230714032431_ForeignKeyChange.Designer.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: change"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/DbContextExtensions.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: tests"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/GlobalUsings.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: tests"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TodoApplication.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: tests"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TokenService.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Matched terms: tests"
+                                               }
+                                           ]
+                        },
+                        {
+                            "Query":  "Explain this project like I am a new developer joining the team.",
+                            "Type":  "ask",
+                            "Answer":  "AI service error: No such host is known. (eu-de.ml.cloud.ibm.com:443)\n\n### Short Answer\r\nBased on repository analysis of **TodoApi**, this project contains 13 relevant files across 6 modules and 6 architectural layers.\r\n\r\n### What This Means\r\nCodeCompass continuously indexes source files, imports, endpoints, and database models to map out how the application is constructed from first principles.\r\n\r\n### How It Works in This Project\r\nRepository: TodoApi\nPrimary language: C#\nTotal files: 78\nLanguages: C# (40 files), JSON (13 files), XML (9 files), Shell (1 files), YAML (1 files)\nDetected modules:\n  - hooks [Hooks] at .git/hooks\n  - Migrations [Migrations] at Todo.Api/Migrations\n  - Client [Frontend] at Todo.Web/Client\n  - Server [Backend] at Todo.Web/Server\n  - Shared [Shared] at Todo.Web/Shared\n  - Components [Components] at Todo.Web/Client/Components\r\n\r\n**Implemented Features in this Repository:**\r\n- [IMPLEMENTED] CRUD Endpoints: Complete `GET /todos`, `POST /todos`, `PUT /todos/{id}`, `DELETE /todos/{id}` in `Todo.Api/Todos/TodoApi.cs`.\r\n- [IMPLEMENTED] User Scoping: Every query filters todos by `CurrentUser.Id` to isolate user data.\r\n- [IMPLEMENTED] Input Parameter Validation: `ValidationFilter.cs` applies `MiniValidator` to `TodoItem` DTOs.\r\n- [IMPLEMENTED] Per-User Rate Limiting: Configured in `RateLimitExtensions.cs` to prevent abuse.\r\n- [IMPLEMENTED] Frontend API Client: `Todo.Web/Client/TodoClient.cs` handles HTTP requests from Blazor.\r\n- [IMPLEMENTED] Database Persistence: Entity Framework Core with SQLite in `TodoDbContext.cs`.\r\n\r\n**Missing / Next Production Concepts:**\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Soft Delete (tombstoning): Not implemented (deletes permanently remove rows from SQLite).\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Todo Due Dates, Priority Levels, and Tags: Not implemented (model only supports Title and IsComplete).\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Pagination and Search: Not implemented (loads all user items at once).\r\n\r\n### Flow\r\n```\r\nHTTP Request / Client\r\n       ↓\r\nEndpoint Handler (GET /)\r\n       ↓\r\nBusiness / Service Logic \u0026 EF Core DbContext\r\n       ↓\r\nDatabase (SQLite / Persistent Store)\r\n```\r\n\r\n### Important Files\r\n- `Todo.Api/Todos/TodoApi.cs` (C#) — Architectural context file\r\n- `Todo.Api.Tests/TodoApiTests.cs` (C#) — Architectural context file\r\n- `Todo.Web/Server/TodoApi.cs` (C#) — Architectural context file\r\n- `Todo.Web/Client/TodoClient.cs` (C#) — Architectural context file\r\n- `Todo.Api/Migrations/TodoDbContextModelSnapshot.cs` (C#) — Architectural context file\r\n- `Todo.Api/TodoDbContext.cs` (C#) — Architectural context file\r\n\r\n### What To Explore Next\r\n1. Review the primary entry point and route registrations.\r\n2. Inspect the database context configuration and entity model definitions.\r\n3. Run the API locally and test endpoints using curl or Swagger.\r\n",
+                            "References":  [
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TodoApiTests.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/TodoDbContextModelSnapshot.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/TodoDbContext.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Filters/ValidationFilter.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/Todo.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "TodoApp.AppHost/Program.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "README.md",
+                                                   "language":  "Markdown",
+                                                   "reason":  "Architectural context file"
+                                               }
+                                           ]
+                        },
+                        {
+                            "Query":  "Continue.",
+                            "Type":  "ask",
+                            "Answer":  "AI service error: No such host is known. (eu-de.ml.cloud.ibm.com:443)\n\n### Short Answer\r\nBased on repository analysis of **TodoApi**, this project contains 8 relevant files across 6 modules and 6 architectural layers.\r\n\r\n### What This Means\r\nCodeCompass continuously indexes source files, imports, endpoints, and database models to map out how the application is constructed from first principles.\r\n\r\n### How It Works in This Project\r\nRepository: TodoApi\nPrimary language: C#\nTotal files: 78\nLanguages: C# (40 files), JSON (13 files), XML (9 files), Shell (1 files), YAML (1 files)\nDetected modules:\n  - hooks [Hooks] at .git/hooks\n  - Migrations [Migrations] at Todo.Api/Migrations\n  - Client [Frontend] at Todo.Web/Client\n  - Server [Backend] at Todo.Web/Server\n  - Shared [Shared] at Todo.Web/Shared\n  - Components [Components] at Todo.Web/Client/Components\r\n\r\n**Implemented Features in this Repository:**\r\n- [IMPLEMENTED] CRUD Endpoints: Complete `GET /todos`, `POST /todos`, `PUT /todos/{id}`, `DELETE /todos/{id}` in `Todo.Api/Todos/TodoApi.cs`.\r\n- [IMPLEMENTED] User Scoping: Every query filters todos by `CurrentUser.Id` to isolate user data.\r\n- [IMPLEMENTED] Input Parameter Validation: `ValidationFilter.cs` applies `MiniValidator` to `TodoItem` DTOs.\r\n- [IMPLEMENTED] Per-User Rate Limiting: Configured in `RateLimitExtensions.cs` to prevent abuse.\r\n- [IMPLEMENTED] Frontend API Client: `Todo.Web/Client/TodoClient.cs` handles HTTP requests from Blazor.\r\n- [IMPLEMENTED] Database Persistence: Entity Framework Core with SQLite in `TodoDbContext.cs`.\r\n\r\n**Missing / Next Production Concepts:**\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Soft Delete (tombstoning): Not implemented (deletes permanently remove rows from SQLite).\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Todo Due Dates, Priority Levels, and Tags: Not implemented (model only supports Title and IsComplete).\r\n- [NOT IMPLEMENTED — NEXT CONCEPT] Pagination and Search: Not implemented (loads all user items at once).\r\n\r\n### Flow\r\n```\r\nHTTP Request / Client\r\n       ↓\r\nEndpoint Handler (GET /)\r\n       ↓\r\nBusiness / Service Logic \u0026 EF Core DbContext\r\n       ↓\r\nDatabase (SQLite / Persistent Store)\r\n```\r\n\r\n### Important Files\r\n- `Todo.Api/Todos/TodoApi.cs` (C#) — Architectural context file\r\n- `Todo.Api.Tests/TodoApiTests.cs` (C#) — Architectural context file\r\n- `Todo.Web/Server/TodoApi.cs` (C#) — Architectural context file\r\n- `Todo.Web/Client/TodoClient.cs` (C#) — Architectural context file\r\n- `Todo.Api/Migrations/TodoDbContextModelSnapshot.cs` (C#) — Architectural context file\r\n- `Todo.Api/TodoDbContext.cs` (C#) — Architectural context file\r\n\r\n### What To Explore Next\r\n1. Review the primary entry point and route registrations.\r\n2. Inspect the database context configuration and entity model definitions.\r\n3. Run the API locally and test endpoints using curl or Swagger.\r\n",
+                            "References":  [
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api.Tests/TodoApiTests.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Server/TodoApi.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Web/Client/TodoClient.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Migrations/TodoDbContextModelSnapshot.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/TodoDbContext.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Filters/ValidationFilter.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               },
+                                               {
+                                                   "filePath":  "Todo.Api/Todos/Todo.cs",
+                                                   "language":  "C#",
+                                                   "reason":  "Architectural context file"
+                                               }
+                                           ]
+                        }
+                    ],
+    "Tests":  [
+                  {
+                      "TestName":  "Health Endpoint",
+                      "Passed":  true,
+                      "Details":  "Status: healthy, WatsonX: True, Provider: IBM watsonx • Granite"
+                  },
+                  {
+                      "TestName":  "Repository Listing",
+                      "Passed":  true,
+                      "Details":  "Found 6 repositories. Active repo: TodoApi (C#)"
+                  },
+                  {
+                      "TestName":  "Repository Analysis",
+                      "Passed":  true,
+                      "Details":  "Files: 78, Modules: 6, Deps: 0, Langs: 8"
+                  },
+                  {
+                      "TestName":  "Architecture Graph",
+                      "Passed":  true,
+                      "Details":  "Nodes: 6, Links: 0, Layers: 0"
+                  },
+                  {
+                      "TestName":  "Module Detail",
+                      "Passed":  true,
+                      "Details":  "Module \u0027Client\u0027 [Type: Frontend, Files: 10]"
+                  },
+                  {
+                      "TestName":  "Onboarding Path (Backend Developer)",
+                      "Passed":  true,
+                      "Details":  "Steps: 5, Progress: 60%"
+                  },
+                  {
+                      "TestName":  "Onboarding Path (Frontend Developer)",
+                      "Passed":  true,
+                      "Details":  "Steps: 6, Progress: 0%"
+                  },
+                  {
+                      "TestName":  "Onboarding Path (Full Stack Developer)",
+                      "Passed":  true,
+                      "Details":  "Steps: 6, Progress: 0%"
+                  },
+                  {
+                      "TestName":  "Onboarding Path (QA Engineer)",
+                      "Passed":  true,
+                      "Details":  "Steps: 4, Progress: 0%"
+                  },
+                  {
+                      "TestName":  "Onboarding Step Detail",
+                      "Passed":  true,
+                      "Details":  "Title: \u0027Project Structure \u0026 Solution Architecture\u0027, Files: 10"
+                  },
+                  {
+                      "TestName":  "Onboarding Step Complete",
+                      "Passed":  true,
+                      "Details":  "New progress: 60%"
+                  },
+                  {
+                      "TestName":  "Starter Tasks List",
+                      "Passed":  true,
+                      "Details":  "Found 4 tasks. Top task: \u0027Add validation attribute to todo model\u0027 (Easy)"
+                  },
+                  {
+                      "TestName":  "Starter Task Detail",
+                      "Passed":  true,
+                      "Details":  "Impact items: 10, Relevant files: 8"
+                  },
+                  {
+                      "TestName":  "Negative: Invalid Repo ID",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 404"
+                  },
+                  {
+                      "TestName":  "Negative: Invalid Module ID",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 404"
+                  },
+                  {
+                      "TestName":  "Negative: Invalid Task ID",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 404"
+                  },
+                  {
+                      "TestName":  "Negative: Invalid Step ID",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 404"
+                  },
+                  {
+                      "TestName":  "Negative: Empty Question",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 400"
+                  },
+                  {
+                      "TestName":  "Negative: Non-GitHub URL",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 400"
+                  },
+                  {
+                      "TestName":  "Negative: Unsafe URL Injection",
+                      "Passed":  true,
+                      "Details":  "Correctly returned HTTP 400"
+                  },
+                  {
+                      "TestName":  "AI: Architecture Explanation",
+                      "Passed":  true,
+                      "Details":  "Elapsed: 9457ms, AnswerLen: 2933, Refs: 30"
+                  },
+                  {
+                      "TestName":  "AI: Authentication Roadmap",
+                      "Passed":  true,
+                      "Details":  "Elapsed: 22138ms, AnswerLen: 5917, Refs: 21"
+                  },
+                  {
+                      "TestName":  "AI: Request Flow Trace",
+                      "Passed":  true,
+                      "Details":  "Elapsed: 11768ms, AnswerLen: 3510, Refs: 30"
+                  },
+                  {
+                      "TestName":  "AI: Change Impact Assessment",
+                      "Passed":  true,
+                      "Details":  "Elapsed: 250529ms, AnswerLen: 2839, Refs: 16"
+                  },
+                  {
+                      "TestName":  "AI: Developer Onboarding Overview",
+                      "Passed":  true,
+                      "Details":  "Elapsed: 354ms, AnswerLen: 2841, Refs: 13"
+                  },
+                  {
+                      "TestName":  "AI: Session Continuation",
+                      "Passed":  true,
+                      "Details":  "Elapsed: 61ms, AnswerLen: 2840, Refs: 8"
+                  }
+              ]
+}
