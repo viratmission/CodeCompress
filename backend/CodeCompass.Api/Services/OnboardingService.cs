@@ -24,7 +24,7 @@ public class OnboardingService : IOnboardingService
 
     // ── Get or create onboarding path for a repository & role ───────────────
     public async Task<OnboardingPathDto> GetOrCreateOnboardingPathAsync(
-        int repositoryId, string role, CancellationToken ct = default)
+        int repositoryId, string role, CancellationToken ct = default, int? userId = null)
     {
         var repo = await _db.Repositories
             .Include(r => r.Modules)
@@ -45,10 +45,12 @@ public class OnboardingService : IOnboardingService
             path = await GeneratePathAsync(repo, normalizedRole, ct);
         }
 
-        // Check or create UserOnboarding session
+        // Check or create UserOnboarding session scoped by current user
         var userOnboarding = await _db.UserOnboardings
             .Include(u => u.UserSteps)
-            .FirstOrDefaultAsync(u => u.RepositoryId == repositoryId && u.OnboardingPathId == path.Id, ct);
+            .FirstOrDefaultAsync(u => u.RepositoryId == repositoryId 
+                                   && u.OnboardingPathId == path.Id
+                                   && (userId == null ? u.UserId == null : u.UserId == userId), ct);
 
         if (userOnboarding == null)
         {
@@ -56,6 +58,7 @@ public class OnboardingService : IOnboardingService
             {
                 RepositoryId       = repositoryId,
                 OnboardingPathId   = path.Id,
+                UserId             = userId,
                 ProgressPercentage = 0,
                 StartedAt          = DateTime.UtcNow,
             };
@@ -161,8 +164,16 @@ public class OnboardingService : IOnboardingService
 
     // ── Get step detail with grounded explanations and files ─────────────────
     public async Task<OnboardingStepDetailDto?> GetStepDetailAsync(
-        int userOnboardingId, int stepId, CancellationToken ct = default)
+        int userOnboardingId, int stepId, CancellationToken ct = default, int? userId = null)
     {
+        var userOnboarding = await _db.UserOnboardings
+            .FirstOrDefaultAsync(u => u.Id == userOnboardingId, ct);
+
+        if (userOnboarding == null) return null;
+
+        if (userId.HasValue && userOnboarding.UserId.HasValue && userOnboarding.UserId.Value != userId.Value)
+            throw new UnauthorizedAccessException("Forbidden: You do not have permission to access another user's onboarding progress.");
+
         var userStep = await _db.UserOnboardingSteps
             .Include(us => us.OnboardingStep)
             .ThenInclude(s => s.OnboardingPath)
@@ -259,19 +270,22 @@ public class OnboardingService : IOnboardingService
 
     // ── Complete step and recalculate dynamic progress ──────────────────────
     public async Task<CompleteStepResponseDto> CompleteStepAsync(
-        int userOnboardingId, int stepId, CancellationToken ct = default)
+        int userOnboardingId, int stepId, CancellationToken ct = default, int? userId = null)
     {
-        var userStep = await _db.UserOnboardingSteps
-            .FirstOrDefaultAsync(us => us.UserOnboardingId == userOnboardingId && us.OnboardingStepId == stepId, ct);
-
-        if (userStep == null)
-            throw new InvalidOperationException($"Step {stepId} not found for onboarding session {userOnboardingId}.");
-
         var userOnboarding = await _db.UserOnboardings
             .FirstOrDefaultAsync(u => u.Id == userOnboardingId, ct);
 
         if (userOnboarding == null)
             throw new InvalidOperationException($"User onboarding session {userOnboardingId} not found.");
+
+        if (userId.HasValue && userOnboarding.UserId.HasValue && userOnboarding.UserId.Value != userId.Value)
+            throw new UnauthorizedAccessException("Forbidden: You do not have permission to modify another user's onboarding progress.");
+
+        var userStep = await _db.UserOnboardingSteps
+            .FirstOrDefaultAsync(us => us.UserOnboardingId == userOnboardingId && us.OnboardingStepId == stepId, ct);
+
+        if (userStep == null)
+            throw new InvalidOperationException($"Step {stepId} not found for onboarding session {userOnboardingId}.");
 
         userStep.Status      = "completed";
         userStep.CompletedAt = DateTime.UtcNow;

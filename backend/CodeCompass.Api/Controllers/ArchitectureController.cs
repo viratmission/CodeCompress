@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CodeCompass.Api.Services;
 using CodeCompass.Api.DTOs;
 
 namespace CodeCompass.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/repositories/{repositoryId:int}")]
 public class ArchitectureController : ControllerBase

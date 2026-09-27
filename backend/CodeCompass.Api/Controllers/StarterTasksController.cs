@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CodeCompass.Api.DTOs;
 using CodeCompass.Api.Services;
 
 namespace CodeCompass.Api.Controllers;
 
+[Authorize]
 [ApiController]
 public class StarterTasksController : ControllerBase
 {

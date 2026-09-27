@@ -1,9 +1,12 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CodeCompass.Api.DTOs;
 using CodeCompass.Api.Services;
 
 namespace CodeCompass.Api.Controllers;
 
+[Authorize]
 [ApiController]
 public class OnboardingController : ControllerBase
 {
@@ -18,6 +21,12 @@ public class OnboardingController : ControllerBase
         _logger     = logger;
     }
 
+    private int? GetCurrentUserId()
+    {
+        var claim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return int.TryParse(claim, out var id) ? id : null;
+    }
+
     // ── GET /api/repositories/{repositoryId}/onboarding/{role} ─────────────
     [HttpGet("api/repositories/{repositoryId:int}/onboarding/{role}")]
     public async Task<ActionResult<OnboardingPathDto>> GetOnboardingPath(
@@ -25,7 +34,8 @@ public class OnboardingController : ControllerBase
     {
         try
         {
-            var path = await _onboarding.GetOrCreateOnboardingPathAsync(repositoryId, role, ct);
+            var userId = GetCurrentUserId();
+            var path = await _onboarding.GetOrCreateOnboardingPathAsync(repositoryId, role, ct, userId);
             return Ok(path);
         }
         catch (InvalidOperationException ex)
@@ -46,11 +56,16 @@ public class OnboardingController : ControllerBase
     {
         try
         {
-            var detail = await _onboarding.GetStepDetailAsync(onboardingId, stepId, ct);
+            var userId = GetCurrentUserId();
+            var detail = await _onboarding.GetStepDetailAsync(onboardingId, stepId, ct, userId);
             if (detail == null)
                 return NotFound(new { error = $"Step {stepId} not found for onboarding {onboardingId}." });
 
             return Ok(detail);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return StatusCode(403, new { error = ex.Message });
         }
         catch (Exception ex)
         {
@@ -66,8 +81,13 @@ public class OnboardingController : ControllerBase
     {
         try
         {
-            var result = await _onboarding.CompleteStepAsync(onboardingId, stepId, ct);
+            var userId = GetCurrentUserId();
+            var result = await _onboarding.CompleteStepAsync(onboardingId, stepId, ct, userId);
             return Ok(result);
+        }
+        catch (UnauthorizedAccessException ex)
+        {
+            return StatusCode(403, new { error = ex.Message });
         }
         catch (InvalidOperationException ex)
         {

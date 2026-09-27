@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CodeCompass.Api.Data;
@@ -6,6 +7,7 @@ using CodeCompass.Api.Services;
 
 namespace CodeCompass.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/[controller]")]
 public class RepositoriesController : ControllerBase

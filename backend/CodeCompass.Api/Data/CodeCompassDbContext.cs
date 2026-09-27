@@ -29,6 +29,15 @@ public class CodeCompassDbContext : DbContext
         modelBuilder.Entity<User>(entity =>
         {
             entity.HasIndex(u => u.Email).IsUnique();
+            entity.Property(u => u.DisplayName).HasColumnName("Name");
+        });
+
+        modelBuilder.Entity<Conversation>(entity =>
+        {
+            entity.HasOne(c => c.User)
+                  .WithMany()
+                  .HasForeignKey(c => c.UserId)
+                  .OnDelete(DeleteBehavior.SetNull);
         });
 
         modelBuilder.Entity<Repository>(entity =>

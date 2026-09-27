@@ -4,6 +4,9 @@ import ArchitecturePage from './ArchitecturePage'
 import AssistantPage from './AssistantPage'
 import OnboardingPage from './OnboardingPage'
 import { CodeCompassLogo } from './CodeCompassLogo'
+import { AuthProvider, useAuth } from './context/AuthContext'
+import { LoginPage } from './LoginPage'
+import { RegisterPage } from './RegisterPage'
 
 // ── Types ──────────────────────────────────────────────────────────────────
 interface HealthStatus {
@@ -105,7 +108,7 @@ const fmt = (n: number) => n?.toLocaleString() ?? '0'
 const fmtBytes = (b: number) => b < 1024 ? `${b} B` : b < 1048576 ? `${(b/1024).toFixed(1)} KB` : `${(b/1048576).toFixed(1)} MB`
 
 // ══════════════════════════════════════════════════════════════════════════
-function App() {
+function Dashboard({ user, onLogout }: { user: any; onLogout: () => void }) {
   const [connectionState, setConnectionState] = useState<ConnectionState>('checking')
   const [healthData, setHealthData]           = useState<HealthStatus | null>(null)
   const [repositories, setRepositories]       = useState<Repository[]>([])
@@ -335,6 +338,24 @@ function App() {
               <span className={`status-dot status-dot--${connectionState}`} />
               <span>{connectionState === 'connected' ? 'Connected' : connectionState === 'checking' ? 'Checking…' : 'Unreachable'}</span>
             </div>
+
+            {/* Authenticated User Profile */}
+            <div className="header-user-pill" title={`${user?.displayName || 'User'} (${user?.email || ''})`}>
+              <div className="header-user-avatar">
+                {user?.displayName ? user.displayName[0].toUpperCase() : 'U'}
+              </div>
+              <span className="header-user-name">{user?.displayName || 'Developer'}</span>
+            </div>
+
+            {/* Logout Button */}
+            <button
+              className="header-logout-btn"
+              onClick={onLogout}
+              title="Sign out of CodeCompass"
+            >
+              <span>⎋</span>
+              <span>Logout</span>
+            </button>
           </div>
         </header>
 
@@ -1141,4 +1162,37 @@ function AnalyzePage({ gitUrl, setGitUrl, analysisState, analysisError, analysis
   )
 }
 
-export default App
+function AppRoot() {
+  const { user, isAuthenticated, loading, logout } = useAuth()
+  const [authView, setAuthView] = useState<'login' | 'register'>('login')
+
+  if (loading) {
+    return (
+      <div className="auth-loading-screen">
+        <CodeCompassLogo size={56} />
+        <div className="auth-loading-spinner" />
+        <div style={{ fontWeight: 500, letterSpacing: '0.01em', color: 'var(--text-secondary)' }}>
+          Authenticating CodeCompass...
+        </div>
+      </div>
+    )
+  }
+
+  if (!isAuthenticated) {
+    return authView === 'login' ? (
+      <LoginPage onSwitchToRegister={() => setAuthView('register')} />
+    ) : (
+      <RegisterPage onSwitchToLogin={() => setAuthView('login')} />
+    )
+  }
+
+  return <Dashboard user={user} onLogout={logout} />
+}
+
+export default function App() {
+  return (
+    <AuthProvider>
+      <AppRoot />
+    </AuthProvider>
+  )
+}

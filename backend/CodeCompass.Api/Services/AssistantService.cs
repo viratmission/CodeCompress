@@ -36,7 +36,7 @@ public class AssistantService : IAssistantService
 
     // ── Main ask handler ──────────────────────────────────────────────────
     public async Task<AssistantAnswerDto> AskAsync(
-        int repositoryId, AskRequestDto request, CancellationToken ct = default)
+        int repositoryId, AskRequestDto request, CancellationToken ct = default, int? userId = null)
     {
         if (string.IsNullOrWhiteSpace(request.Question))
             throw new ArgumentException("Question must not be empty.");
@@ -120,6 +120,7 @@ public class AssistantService : IAssistantService
         _db.Conversations.Add(new Conversation
         {
             RepositoryId = repositoryId,
+            UserId       = userId,
             SessionId    = sessionId,
             Question     = request.Question,
             Answer       = answer.Length > 25000 ? answer[..25000] : answer,

@@ -1,3 +1,5 @@
+using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using CodeCompass.Api.Data;
 using CodeCompass.Api.DTOs;
@@ -6,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CodeCompass.Api.Controllers;
 
+[Authorize]
 [ApiController]
 [Route("api/repositories/{repositoryId:int}/assistant")]
 public class AssistantController : ControllerBase
@@ -24,6 +27,12 @@ public class AssistantController : ControllerBase
         _logger    = logger;
     }
 
+    private int? GetCurrentUserId()
+    {
+        var claim = User.FindFirstValue(ClaimTypes.NameIdentifier);
+        return int.TryParse(claim, out var id) ? id : null;
+    }
+
     // ── POST /api/repositories/{id}/assistant/ask ─────────────────────────
     [HttpPost("ask")]
     public async Task<ActionResult<AssistantAnswerDto>> Ask(
@@ -36,7 +45,8 @@ public class AssistantController : ControllerBase
 
         try
         {
-            var answer = await _assistant.AskAsync(repositoryId, request, ct);
+            var userId = GetCurrentUserId();
+            var answer = await _assistant.AskAsync(repositoryId, request, ct, userId);
             return Ok(answer);
         }
         catch (ArgumentException ex)
@@ -82,12 +92,20 @@ public class AssistantController : ControllerBase
         [FromQuery] string? sessionId,
         CancellationToken ct)
     {
+        var userId = GetCurrentUserId();
         var query = _db.Conversations
             .Where(c => c.RepositoryId == repositoryId)
             .AsQueryable();
 
-        if (!string.IsNullOrWhiteSpace(sessionId))
+        if (userId.HasValue)
+        {
+            // Scope by authenticated user; also allow unassigned legacy conversations matching sessionId
+            query = query.Where(c => c.UserId == userId.Value || (c.UserId == null && c.SessionId == sessionId));
+        }
+        else if (!string.IsNullOrWhiteSpace(sessionId))
+        {
             query = query.Where(c => c.SessionId == sessionId);
+        }
 
         var history = await query
             .OrderByDescending(c => c.CreatedAt)

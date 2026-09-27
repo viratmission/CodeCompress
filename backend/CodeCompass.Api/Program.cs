@@ -1,4 +1,6 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using CodeCompass.Api.Data;
 using CodeCompass.Api.Services;
 
@@ -12,6 +14,7 @@ builder.Services.AddHttpClient("watsonx");
 builder.Services.AddHttpClient("iam");
 
 // ── Application services ───────────────────────────────────────────────────
+builder.Services.AddScoped<IAuthService, AuthService>();
 builder.Services.AddScoped<IRepositoryAnalyzer, RepositoryAnalyzer>();
 builder.Services.AddScoped<IArchitectureService, ArchitectureService>();
 builder.Services.AddScoped<IContextRetrievalService, ContextRetrievalService>();
@@ -20,12 +23,34 @@ builder.Services.AddScoped<IAssistantService, AssistantService>();
 builder.Services.AddScoped<IOnboardingService, OnboardingService>();
 builder.Services.AddScoped<IStarterTaskService, StarterTaskService>();
 
+// ── Authentication & JWT Bearer ────────────────────────────────────────────
+builder.Services.AddAuthentication(options =>
+{
+    options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+    options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+})
+.AddJwtBearer(options =>
+{
+    options.RequireHttpsMetadata = false; // Dev environment friendly
+    options.SaveToken = true;
+    options.TokenValidationParameters = new TokenValidationParameters
+    {
+        ValidateIssuerSigningKey = true,
+        IssuerSigningKey = JwtKeyHelper.GetSecurityKey(builder.Configuration),
+        ValidateIssuer = true,
+        ValidIssuer = JwtKeyHelper.GetIssuer(builder.Configuration),
+        ValidateAudience = true,
+        ValidAudience = JwtKeyHelper.GetAudience(builder.Configuration),
+        ValidateLifetime = true,
+        ClockSkew = TimeSpan.FromMinutes(1)
+    };
+});
+
+builder.Services.AddAuthorization();
+
 // ── Swagger / OpenAPI ──────────────────────────────────────────────────────
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new() { Title = "CodeCompass API", Version = "v1" });
-});
+builder.Services.AddSwaggerGen();
 
 // ── Entity Framework Core / SQL Server ────────────────────────────────────
 builder.Services.AddDbContext<CodeCompassDbContext>(options =>
@@ -58,6 +83,7 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 app.UseCors("ReactDevServer");
+app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
 

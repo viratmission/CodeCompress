@@ -8,6 +8,8 @@ public class Conversation
 
     public int RepositoryId { get; set; }
 
+    public int? UserId { get; set; }
+
     [MaxLength(200)]
     public string SessionId { get; set; } = string.Empty;
 
@@ -24,4 +26,5 @@ public class Conversation
 
     // Navigation
     public Repository Repository { get; set; } = null!;
+    public User? User { get; set; }
 }
