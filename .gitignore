@@ -11,10 +11,17 @@ obj/
 ## Environment / secrets
 appsettings.Production.json
 appsettings.Local.json
+appsettings.secrets.json
 *.env
 .env
 .env.*
 secrets.json
+*.key
+*.pem
+*.pfx
+*.p12
+id_rsa*
+id_ed25519*
 
 ## Database files
 *.mdf

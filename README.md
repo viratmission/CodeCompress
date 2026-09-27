@@ -215,14 +215,14 @@ npm run dev
 Open `http://localhost:5173` in your browser.
 
 ### 4. Optional: IBM watsonx.ai Configuration
-Set your IBM watsonx credentials in your environment or in `backend/CodeCompass.Api/appsettings.json`:
+Set your IBM watsonx credentials as environment variables outside source control:
 ```powershell
 $env:WatsonX__ApiKey="<YOUR_IBM_CLOUD_API_KEY>"
 $env:WatsonX__ProjectId="<YOUR_WATSONX_PROJECT_ID>"
 $env:WatsonX__Url="https://eu-de.ml.cloud.ibm.com"
 $env:WatsonX__ModelId="meta-llama/llama-3-3-70b-instruct"
 ```
-*Note: If omitted, CodeCompass automatically operates in repository-grounded fallback mode.*
+*Note: Never commit API credentials to source control. If omitted, CodeCompass automatically operates in repository-grounded fallback mode.*
 
 ### 5. Build Verification
 ```powershell

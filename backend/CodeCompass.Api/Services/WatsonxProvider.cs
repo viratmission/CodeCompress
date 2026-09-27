@@ -36,12 +36,34 @@ public class WatsonxProvider
         _logger      = logger;
     }
 
+    private string? GetSetting(string key)
+    {
+        var val = _config[key];
+        if (!string.IsNullOrWhiteSpace(val)) return val.Trim();
+
+        var dblUnderscore = key.Replace(":", "__");
+        val = _config[dblUnderscore]
+           ?? Environment.GetEnvironmentVariable(dblUnderscore)
+           ?? Environment.GetEnvironmentVariable(dblUnderscore, EnvironmentVariableTarget.User)
+           ?? Environment.GetEnvironmentVariable(dblUnderscore, EnvironmentVariableTarget.Machine);
+
+        if (!string.IsNullOrWhiteSpace(val)) return val.Trim();
+
+        var singleUnderscore = key.Replace(":", "_");
+        val = _config[singleUnderscore]
+            ?? Environment.GetEnvironmentVariable(singleUnderscore)
+            ?? Environment.GetEnvironmentVariable(singleUnderscore, EnvironmentVariableTarget.User)
+            ?? Environment.GetEnvironmentVariable(singleUnderscore, EnvironmentVariableTarget.Machine);
+
+        return string.IsNullOrWhiteSpace(val) ? null : val.Trim();
+    }
+
     /// <summary>Returns null if credentials are not configured.</summary>
     public bool IsConfigured()
     {
-        var key = _config["WatsonX:ApiKey"];
-        var pid = _config["WatsonX:ProjectId"];
-        var url = _config["WatsonX:Url"];
+        var key = GetSetting("WatsonX:ApiKey");
+        var pid = GetSetting("WatsonX:ProjectId");
+        var url = GetSetting("WatsonX:Url");
         return !string.IsNullOrWhiteSpace(key)
             && !string.IsNullOrWhiteSpace(pid)
             && !string.IsNullOrWhiteSpace(url);
@@ -49,10 +71,10 @@ public class WatsonxProvider
 
     public async Task<string> ChatAsync(string systemPrompt, string userMessage, CancellationToken ct)
     {
-        var apiKey    = _config["WatsonX:ApiKey"]    ?? throw new InvalidOperationException("WatsonX:ApiKey is not configured.");
-        var projectId = _config["WatsonX:ProjectId"] ?? throw new InvalidOperationException("WatsonX:ProjectId is not configured.");
-        var baseUrl   = (_config["WatsonX:Url"] ?? throw new InvalidOperationException("WatsonX:Url is not configured.")).TrimEnd('/');
-        var modelId   = _config["WatsonX:ModelId"] ?? DefaultModelId;
+        var apiKey    = GetSetting("WatsonX:ApiKey")    ?? throw new InvalidOperationException("WatsonX:ApiKey is not configured.");
+        var projectId = GetSetting("WatsonX:ProjectId") ?? throw new InvalidOperationException("WatsonX:ProjectId is not configured.");
+        var baseUrl   = (GetSetting("WatsonX:Url") ?? throw new InvalidOperationException("WatsonX:Url is not configured.")).TrimEnd('/');
+        var modelId   = GetSetting("WatsonX:ModelId") ?? DefaultModelId;
 
         var token = await GetIamTokenAsync(apiKey, ct);
         var client = _httpFactory.CreateClient("watsonx");

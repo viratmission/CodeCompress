@@ -807,7 +807,7 @@ public class OnboardingService : IOnboardingService
                 sb.AppendLine();
             }
 
-            sb.AppendLine("> **AI Configuration Status:** IBM watsonx is not configured. To enable live AI generation, configure `WatsonX__ApiKey` and `WatsonX__ProjectId` (and optionally `WatsonX__Url`, `WatsonX__ModelId`) as environment variables or in `appsettings.json`.");
+            sb.AppendLine("> **AI Configuration Status:** IBM watsonx is not configured. To enable live AI generation, configure `WatsonX__ApiKey` and `WatsonX__ProjectId` (and optionally `WatsonX__Url`, `WatsonX__ModelId`) as environment variables outside source control.");
             return sb.ToString();
         }
 
